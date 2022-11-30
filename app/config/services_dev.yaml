@@ -1,0 +1,20 @@
+services:
+  DataFixtures\LocationFixtures:
+    tags:
+      - { name: doctrine.fixture.orm }
+
+  DataFixtures\EpisodeFixtures:
+    tags:
+      - { name: doctrine.fixture.orm }
+
+  DataFixtures\CharacterFixtures:
+    tags:
+      - { name: doctrine.fixture.orm }
+
+  DataFixtures\FileFixtures:
+    tags:
+      - { name: doctrine.fixture.orm }
+
+  DataFixtures\UserFixtures:
+    tags:
+      - { name: doctrine.fixture.orm }

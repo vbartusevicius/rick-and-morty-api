@@ -10,6 +10,10 @@ services:
     container_name: php
     volumes:
       - "./app:/var/www/html"
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    environment:
+      PHP_IDE_CONFIG: "serverName=local"
     networks:
       - app-network
 
