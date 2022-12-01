@@ -6,6 +6,9 @@
         <id name="id" type="integer" column="id">
             <generator strategy="IDENTITY"/>
         </id>
+        <unique-constraints>
+            <unique-constraint columns="user_id,episode_id" />
+        </unique-constraints>
         <field name="rating" nullable="false" type="string" enum-type="App\Enum\EpisodeRatingEnum" />
         <many-to-one field="episode" target-entity="App\Entity\Episode" />
         <many-to-one field="user" target-entity="App\Entity\User" inversed-by="watchedEpisodes" />

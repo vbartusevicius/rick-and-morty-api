@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Repository\File;
+namespace App\Feature\File\Repository;
 
-use App\Entity\File\File;
-use App\Entity\File\Image;
+use App\Feature\File\Entity\File;
+use App\Feature\File\Entity\Image;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

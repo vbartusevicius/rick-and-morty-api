@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Feature\FileProvider;
+namespace App\Feature\File\Provider;
 
-use App\Entity\DTO\FileContents;
-use App\Entity\File\File;
-use App\Enum\File\FileContentDeliveryEnum;
+use App\Feature\File\DTO\FileContents;
+use App\Feature\File\Entity\File;
+use App\Feature\File\Enum\FileContentDeliveryEnum;
 use App\Exception\ImageNotFoundException;
-use App\Repository\File\ImageRepository;
+use App\Feature\File\Repository\ImageRepository;
 
 class ImageProvider implements FileContentsProviderInterface
 {

@@ -2,11 +2,10 @@
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                    https://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd">
-    <entity name="App\Entity\File\Image" table="images" repository-class="App\Repository\File\ImageRepository">
+    <entity name="App\Feature\File\Entity\File" table="files" repository-class="App\Feature\File\Repository\FileRepository">
         <id name="id" type="integer" column="id">
             <generator strategy="IDENTITY"/>
         </id>
-        <field name="url" nullable="false" type="string"/>
-        <one-to-one field="file" target-entity="App\Entity\File\File"/>
+        <field name="provider" nullable="false" type="string" enum-type="App\Feature\File\Enum\FileProviderEnum" />
     </entity>
 </doctrine-mapping>

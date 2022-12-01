@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Entity\DTO;
+namespace App\Feature\File\DTO;
 
-use App\Enum\File\FileContentDeliveryEnum;
+use App\Feature\File\Enum\FileContentDeliveryEnum;
 
 class FileContents
 {

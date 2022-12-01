@@ -8,12 +8,10 @@ use App\Entity\Location;
 use App\Enum\LocationDimensionEnum;
 use App\Enum\LocationTypeEnum;
 use DataFixtures\Helper\CsvHelper;
-use DataFixtures\Helper\ReflectionHelper;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class LocationFixtures extends Fixture implements OrderedFixtureInterface
+class LocationFixtures extends Fixture
 {
     public const LOCATION_REF = 'location_';
 
@@ -27,17 +25,10 @@ class LocationFixtures extends Fixture implements OrderedFixtureInterface
                 ->setDimension(LocationDimensionEnum::tryFrom($row['dimension']))
             ;
 
-            ReflectionHelper::setId($location, (int) $row['id']);
-
             $manager->persist($location);
-            $this->addReference(self::LOCATION_REF . $location->getId(), $location);
+            $this->addReference(self::LOCATION_REF . $row['id'], $location);
         }
 
         $manager->flush();
-    }
-
-    public function getOrder(): int
-    {
-        return 1;
     }
 }

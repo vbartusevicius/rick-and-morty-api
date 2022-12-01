@@ -1,0 +1,22 @@
+services:
+  App\Feature\File\Provider\ImageProvider:
+    arguments:
+      $imageRepository: '@App\Feature\File\Repository\ImageRepository'
+    tags:
+      - { name: 'feature.file_provider', provider: 'image' }
+
+  App\Feature\File\Provider\FileContentsProvider:
+    arguments:
+      $providers: !tagged_iterator { tag: 'feature.file_provider', index_by: 'provider' }
+
+  App\Feature\File\Repository\FileRepository:
+    arguments:
+      $registry: '@Doctrine\Persistence\ManagerRegistry'
+    tags:
+      - { name: 'doctrine.repository_service' }
+
+  App\Feature\File\Repository\ImageRepository:
+    arguments:
+      $registry: '@Doctrine\Persistence\ManagerRegistry'
+    tags:
+      - { name: 'doctrine.repository_service' }

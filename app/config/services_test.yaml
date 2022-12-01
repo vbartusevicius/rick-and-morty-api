@@ -1,0 +1,7 @@
+imports:
+  - { resource: 'services_dev.yaml' }
+
+services:
+  App\Feature\File\Provider\FileContentsProvider.test:
+    alias: App\Feature\File\Provider\FileContentsProvider
+    public: true

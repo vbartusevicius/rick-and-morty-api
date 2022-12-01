@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use App\Entity\File\File;
+use App\Feature\File\Entity\File;
 use App\Enum\CharacterGenderEnum;
 use App\Enum\CharacterLivelinessEnum;
 use App\Enum\CharacterSpeciesEnum;

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Entity\File;
+namespace App\Feature\File\Entity;
 
-use App\Enum\File\FileProviderEnum;
+use App\Feature\File\Enum\FileProviderEnum;
 
 class File
 {

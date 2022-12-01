@@ -8,12 +8,11 @@ use App\Entity\User;
 use App\Entity\WatchedEpisode;
 use App\Enum\EpisodeRatingEnum;
 use DataFixtures\Helper\CsvHelper;
-use DataFixtures\Helper\ReflectionHelper;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class UserFixtures extends Fixture implements OrderedFixtureInterface
+class UserFixtures extends Fixture implements DependentFixtureInterface
 {
     public const USER_REF = 'user_';
 
@@ -53,17 +52,17 @@ class UserFixtures extends Fixture implements OrderedFixtureInterface
                 ->setName($row['name'])
             ;
 
-            ReflectionHelper::setId($user, (int) $row['id']);
-
             $manager->persist($user);
-            $this->addReference(self::USER_REF . $user->getId(), $user);
+            $this->addReference(self::USER_REF . $row['id'], $user);
         }
 
         $manager->flush();
     }
 
-    public function getOrder(): int
+    public function getDependencies(): array
     {
-        return 3;
+        return [
+            EpisodeFixtures::class,
+        ];
     }
 }

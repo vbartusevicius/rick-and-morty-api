@@ -17,7 +17,7 @@
         <many-to-one field="location" target-entity="App\Entity\Location">
             <join-column nullable="true"/>
         </many-to-one>
-        <one-to-one field="image" target-entity="App\Entity\File\File">
+        <one-to-one field="image" target-entity="App\Feature\File\Entity\File">
             <join-column nullable="true"/>
         </one-to-one>
         <many-to-many field="appearsIn" target-entity="App\Entity\Episode" mapped-by="characters"/>

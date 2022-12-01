@@ -9,13 +9,12 @@ use App\Enum\CharacterGenderEnum;
 use App\Enum\CharacterLivelinessEnum;
 use App\Enum\CharacterSpeciesEnum;
 use DataFixtures\Helper\CsvHelper;
-use DataFixtures\Helper\ReflectionHelper;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use OutOfBoundsException;
 
-class CharacterFixtures extends Fixture implements OrderedFixtureInterface
+class CharacterFixtures extends Fixture implements DependentFixtureInterface
 {
     public const CHARACTER_REF = 'character_';
 
@@ -62,17 +61,19 @@ class CharacterFixtures extends Fixture implements OrderedFixtureInterface
                 ->setImage($this->getReference(FileFixtures::FILE_REF . $row['id']))
             ;
 
-            ReflectionHelper::setId($character, (int) $row['id']);
-
             $manager->persist($character);
-            $this->addReference(self::CHARACTER_REF . $character->getId(), $character);
+            $this->addReference(self::CHARACTER_REF . $row['id'], $character);
         }
 
         $manager->flush();
     }
 
-    public function getOrder(): int
+    public function getDependencies(): array
     {
-        return 3;
+        return [
+            LocationFixtures::class,
+            EpisodeFixtures::class,
+            FileFixtures::class,
+        ];
     }
 }

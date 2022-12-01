@@ -6,13 +6,11 @@ namespace DataFixtures;
 
 use App\Entity\Episode;
 use DataFixtures\Helper\CsvHelper;
-use DataFixtures\Helper\ReflectionHelper;
 use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class EpisodeFixtures extends Fixture implements OrderedFixtureInterface
+class EpisodeFixtures extends Fixture
 {
     public const EPISODE_REF = 'episode_';
 
@@ -29,10 +27,8 @@ class EpisodeFixtures extends Fixture implements OrderedFixtureInterface
                 ->setEpisodeNumber((int) $matches[2])
             ;
 
-            ReflectionHelper::setId($episode, (int) $row['id']);
-
             $manager->persist($episode);
-            $this->addReference(self::EPISODE_REF . $episode->getId(), $episode);
+            $this->addReference(self::EPISODE_REF . $row['id'], $episode);
             $lastEpisode = $episode;
         }
 
@@ -45,10 +41,5 @@ class EpisodeFixtures extends Fixture implements OrderedFixtureInterface
         }
 
         $manager->flush();
-    }
-
-    public function getOrder(): int
-    {
-        return 2;
     }
 }

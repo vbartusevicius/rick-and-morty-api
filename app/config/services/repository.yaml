@@ -1,0 +1,30 @@
+services:
+  App\Repository\CharacterRepository:
+    arguments:
+      $registry: '@Doctrine\Persistence\ManagerRegistry'
+    tags:
+      - { name: 'doctrine.repository_service' }
+
+  App\Repository\EpisodeRepository:
+    arguments:
+      $registry: '@Doctrine\Persistence\ManagerRegistry'
+    tags:
+      - { name: 'doctrine.repository_service' }
+
+  App\Repository\LocationRepository:
+    arguments:
+      $registry: '@Doctrine\Persistence\ManagerRegistry'
+    tags:
+      - { name: 'doctrine.repository_service' }
+
+  App\Repository\UserRepository:
+    arguments:
+      $registry: '@Doctrine\Persistence\ManagerRegistry'
+    tags:
+      - { name: 'doctrine.repository_service' }
+
+  App\Repository\WatchedEpisodeRepository:
+    arguments:
+      $registry: '@Doctrine\Persistence\ManagerRegistry'
+    tags:
+      - { name: 'doctrine.repository_service' }

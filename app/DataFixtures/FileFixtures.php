@@ -4,15 +4,14 @@ declare(strict_types=1);
 
 namespace DataFixtures;
 
-use App\Entity\File\File;
-use App\Entity\File\Image;
-use App\Enum\File\FileProviderEnum;
+use App\Feature\File\Entity\File;
+use App\Feature\File\Entity\Image;
+use App\Feature\File\Enum\FileProviderEnum;
 use DataFixtures\Helper\CsvHelper;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class FileFixtures extends Fixture implements OrderedFixtureInterface
+class FileFixtures extends Fixture
 {
     public const FILE_REF = 'file_';
 
@@ -23,6 +22,7 @@ class FileFixtures extends Fixture implements OrderedFixtureInterface
             $file
                 ->setProvider(FileProviderEnum::Image)
             ;
+
             $image = new Image();
             $image
                 ->setFile($file)
@@ -35,10 +35,5 @@ class FileFixtures extends Fixture implements OrderedFixtureInterface
         }
 
         $manager->flush();
-    }
-
-    public function getOrder(): int
-    {
-        return 2;
     }
 }

@@ -1,7 +1,7 @@
 doctrine:
   dbal:
     url: '%env(resolve:DATABASE_URL)%'
-    server_version: '8'
+    server_version: 'mariadb-10.10.2'
   orm:
     auto_generate_proxy_classes: true
     naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
@@ -13,12 +13,21 @@ doctrine:
         prefix: 'App\Entity'
         alias: App
         type: xml
+      App\Feature\File:
+        is_bundle: false
+        dir: '%kernel.project_dir%/config/doctrine_file'
+        prefix: 'App\Feature\File\Entity'
+        alias: App\Feature\File
+        type: xml
 
 when@test:
   doctrine:
     dbal:
       # "TEST_TOKEN" is typically set by ParaTest
       dbname_suffix: '_test%env(default::TEST_TOKEN)%'
+      driver: pdo_sqlite
+      path: "%kernel.cache_dir%/test.db"
+      url: null
 
 when@prod:
   doctrine:

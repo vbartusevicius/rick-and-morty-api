@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Feature\FileProvider;
+namespace App\Feature\File\Provider;
 
-use App\Entity\DTO\FileContents;
-use App\Entity\File\File;
+use App\Feature\File\DTO\FileContents;
+use App\Feature\File\Entity\File;
 use Exception;
 use Traversable;
 

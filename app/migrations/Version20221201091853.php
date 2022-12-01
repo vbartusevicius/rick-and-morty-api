@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20221130154141 extends AbstractMigration
+final class Version20221201091853 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -27,7 +27,7 @@ final class Version20221130154141 extends AbstractMigration
         $this->addSql('CREATE TABLE images (id INT AUTO_INCREMENT NOT NULL, file_id INT DEFAULT NULL, url VARCHAR(255) NOT NULL, UNIQUE INDEX UNIQ_E01FBE6A93CB796C (file_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE locations (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, type VARCHAR(255) DEFAULT NULL, dimension VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE users (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE watched_episodes (id INT AUTO_INCREMENT NOT NULL, episode_id INT DEFAULT NULL, user_id INT DEFAULT NULL, rating VARCHAR(255) NOT NULL, INDEX IDX_17D69F69362B62A0 (episode_id), INDEX IDX_17D69F69A76ED395 (user_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE watched_episodes (id INT AUTO_INCREMENT NOT NULL, episode_id INT DEFAULT NULL, user_id INT DEFAULT NULL, rating VARCHAR(255) NOT NULL, INDEX IDX_17D69F69362B62A0 (episode_id), INDEX IDX_17D69F69A76ED395 (user_id), UNIQUE INDEX UNIQ_17D69F69A76ED395362B62A0 (user_id, episode_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE characters ADD CONSTRAINT FK_3A29410E3DA5256D FOREIGN KEY (image_id) REFERENCES files (id)');
         $this->addSql('ALTER TABLE characters ADD CONSTRAINT FK_3A29410E56A273CC FOREIGN KEY (origin_id) REFERENCES locations (id)');
         $this->addSql('ALTER TABLE characters ADD CONSTRAINT FK_3A29410E64D218E FOREIGN KEY (location_id) REFERENCES locations (id)');
