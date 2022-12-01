@@ -7,6 +7,8 @@
             <generator strategy="IDENTITY"/>
         </id>
         <field name="name" nullable="false" type="string" />
+        <field name="registeredAt" nullable="false" type="datetime_immutable" />
+        <field name="gender" nullable="true" type="string" enum-type="App\Enum\UserGenderEnum" />
         <one-to-many field="watchedEpisodes" target-entity="App\Entity\WatchedEpisode" mapped-by="user" orphan-removal="true" />
     </entity>
 </doctrine-mapping>

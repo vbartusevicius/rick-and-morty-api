@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Enum\UserGenderEnum;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 
 class User
@@ -11,10 +13,13 @@ class User
     private int $id;
     private string $name;
     private iterable $watchedEpisodes;
+    private DateTimeImmutable $registeredAt;
+    private ?UserGenderEnum $gender;
 
     public function __construct()
     {
         $this->watchedEpisodes = new ArrayCollection();
+        $this->registeredAt = new DateTimeImmutable();
     }
 
     public function getId(): int
@@ -72,6 +77,28 @@ class User
             $episode->removeUser();
 
         }
+        return $this;
+    }
+
+    public function getRegisteredAt(): DateTimeImmutable
+    {
+        return $this->registeredAt;
+    }
+
+    public function setRegisteredAt(DateTimeImmutable $registeredAt): self
+    {
+        $this->registeredAt = $registeredAt;
+        return $this;
+    }
+
+    public function getGender(): ?UserGenderEnum
+    {
+        return $this->gender;
+    }
+
+    public function setGender(?UserGenderEnum $gender): self
+    {
+        $this->gender = $gender;
         return $this;
     }
 }
