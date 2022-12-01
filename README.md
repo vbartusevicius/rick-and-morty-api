@@ -1,5 +1,7 @@
 # Rick and Morty API
 
+Workshop project containing some of "Rick and Morty" characters, episodes, and locations. 
+
 ## Set up
 
  1. `$ docker-compose up -d`
