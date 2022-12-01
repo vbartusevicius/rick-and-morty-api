@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Feature\File\Entity\File;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -16,6 +17,7 @@ class Episode
     private int $episodeNumber;
     private string $description;
     private iterable $characters;
+    private File $image;
 
     public function __construct()
     {
@@ -119,6 +121,17 @@ class Episode
             $this->characters->removeElement($character);
             $character->removeAppearsIn($this);
         }
+        return $this;
+    }
+
+    public function getImage(): File
+    {
+        return $this->image;
+    }
+
+    public function setImage(File $image): self
+    {
+        $this->image = $image;
         return $this;
     }
 }

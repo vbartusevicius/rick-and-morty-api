@@ -13,9 +13,18 @@ use Doctrine\Persistence\ObjectManager;
 
 class FileFixtures extends Fixture
 {
-    public const FILE_REF = 'file_';
+    public const CHARACTER_FILE_REF = 'character_file_';
+    public const EPISODE_FILE_REF = 'episode_file_';
 
     public function load(ObjectManager $manager): void
+    {
+        $this->loadCharacterFiles($manager);
+        $this->loadEpisodeFiles($manager);
+
+        $manager->flush();
+    }
+
+    private function loadCharacterFiles(ObjectManager $manager): void
     {
         foreach (CsvHelper::readRow(__DIR__ . '/fixtures/characters.csv', "\t") as $row) {
             $file = new File();
@@ -31,9 +40,27 @@ class FileFixtures extends Fixture
 
             $manager->persist($file);
             $manager->persist($image);
-            $this->addReference(self::FILE_REF . $row['id'], $file);
+            $this->addReference(self::CHARACTER_FILE_REF . $row['id'], $file);
         }
+    }
 
-        $manager->flush();
+    private function loadEpisodeFiles(ObjectManager $manager): void
+    {
+        foreach (CsvHelper::readRow(__DIR__ . '/fixtures/episodes.csv', "\t") as $row) {
+            $file = new File();
+            $file
+                ->setProvider(FileProviderEnum::Image)
+            ;
+
+            $image = new Image();
+            $image
+                ->setFile($file)
+                ->setUrl(sprintf('https://cataas.com/cat?t=%s', $row['id']))
+            ;
+
+            $manager->persist($file);
+            $manager->persist($image);
+            $this->addReference(self::EPISODE_FILE_REF . $row['id'], $file);
+        }
     }
 }

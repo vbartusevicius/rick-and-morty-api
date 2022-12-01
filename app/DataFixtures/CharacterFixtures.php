@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace DataFixtures;
 
 use App\Entity\Character;
+use App\Entity\Episode;
+use App\Entity\Location;
 use App\Enum\CharacterGenderEnum;
 use App\Enum\CharacterLivelinessEnum;
 use App\Enum\CharacterSpeciesEnum;
@@ -23,42 +25,16 @@ class CharacterFixtures extends Fixture implements DependentFixtureInterface
         foreach (CsvHelper::readRow(__DIR__ . '/fixtures/characters.csv', "\t") as $row) {
             $character = new Character();
 
-            $origin = null;
-            if ($row['origin'] !== null) {
-                try {
-                    $origin = $this->getReference(LocationFixtures::LOCATION_REF . $row['origin']);
-                } catch (OutOfBoundsException) {
-                    // nothing
-                }
-            }
-            $location = null;
-            if ($row['location'] !== null) {
-                try {
-                    $location = $this->getReference(LocationFixtures::LOCATION_REF . $row['location']);
-                } catch (OutOfBoundsException) {
-                    // nothing
-                }
-            }
-            $appearsIn = [];
-            if ($row['episode'] !== null) {
-                $appearsIn = array_map(
-                    function ($id) {
-                        return $this->getReference(EpisodeFixtures::EPISODE_REF . $id);
-                    },
-                    explode(',', $row['episode'])
-                );
-            }
-
             $character
                 ->setName($row['name'])
                 ->setStatus(CharacterLivelinessEnum::tryFrom($row['status']))
                 ->setSpecies(CharacterSpeciesEnum::tryFrom($row['species']))
                 ->setDescription($row['type'])
                 ->setGender(CharacterGenderEnum::tryFrom($row['gender']))
-                ->setOrigin($origin)
-                ->setLocation($location)
-                ->setAppearsIn($appearsIn)
-                ->setImage($this->getReference(FileFixtures::FILE_REF . $row['id']))
+                ->setOrigin($row['origin'] ? $this->getLocation((int) $row['origin']) : null)
+                ->setLocation($row['location'] ? $this->getLocation((int) $row['location']) : null)
+                ->setAppearsIn($row['episode'] ? $this->getEpisodes($row['episode']) : [])
+                ->setImage($this->getReference(FileFixtures::CHARACTER_FILE_REF . $row['id']))
             ;
 
             $manager->persist($character);
@@ -66,6 +42,30 @@ class CharacterFixtures extends Fixture implements DependentFixtureInterface
         }
 
         $manager->flush();
+    }
+
+    private function getLocation(int $id): ?Location
+    {
+        try {
+            return $this->getReference(LocationFixtures::LOCATION_REF . $id);
+        } catch (OutOfBoundsException) {
+            // nothing
+        }
+
+        return null;
+    }
+
+    /**
+     * @return Episode[]
+     */
+    private function getEpisodes(string $episodeList): array
+    {
+        return array_map(
+            function ($id) {
+                return $this->getReference(EpisodeFixtures::EPISODE_REF . $id);
+            },
+            explode(',', $episodeList)
+        );
     }
 
     public function getDependencies(): array
