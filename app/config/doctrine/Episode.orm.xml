@@ -12,6 +12,7 @@
         <field name="episodeNumber" nullable="false" type="integer"/>
         <field name="description" nullable="false" type="text"/>
         <one-to-one field="image" target-entity="App\Feature\File\Entity\File" />
+        <many-to-many field="locations" target-entity="App\Entity\Location" />
         <many-to-many field="characters" target-entity="App\Entity\Character" inversed-by="appearsIn"/>
     </entity>
 </doctrine-mapping>

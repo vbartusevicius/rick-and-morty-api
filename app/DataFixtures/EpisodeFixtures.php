@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace DataFixtures;
 
 use App\Entity\Episode;
+use App\Entity\Location;
 use DataFixtures\Helper\CsvHelper;
 use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use OutOfBoundsException;
 
 class EpisodeFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -21,6 +23,7 @@ class EpisodeFixtures extends Fixture implements DependentFixtureInterface
         $lastEpisode->setAiredAt(new DateTimeImmutable('+1 week 00:00:00'));
 
         $this->loadEpisodeDescriptions();
+        $this->loadEpisodeLocations();
 
         $manager->flush();
     }
@@ -57,10 +60,32 @@ class EpisodeFixtures extends Fixture implements DependentFixtureInterface
         }
     }
 
+    private function loadEpisodeLocations(): void
+    {
+        foreach (CsvHelper::readRow(__DIR__ . '/fixtures/episode_locations.csv', ',') as $item) {
+            /** @var Episode $episode */
+            $episode = $this->getReference(self::EPISODE_REF . $item['id']);
+
+            $locations = array_map(
+                function (string $id): ?Location {
+                    try {
+                        return $this->getReference(LocationFixtures::LOCATION_REF . $id);
+                    } catch (OutOfBoundsException) {
+                        return null;
+                    }
+                },
+                array_unique(explode(' ', $item['location']))
+            );
+
+            $episode->setLocations(array_filter($locations));
+        }
+    }
+
     public function getDependencies(): array
     {
         return [
             FileFixtures::class,
+            LocationFixtures::class,
         ];
     }
 }

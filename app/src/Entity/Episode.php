@@ -18,10 +18,12 @@ class Episode
     private string $description;
     private iterable $characters;
     private File $image;
+    private iterable $locations;
 
     public function __construct()
     {
         $this->characters = new ArrayCollection();
+        $this->locations = new ArrayCollection();
     }
 
     public function getId(): int
@@ -132,6 +134,44 @@ class Episode
     public function setImage(File $image): self
     {
         $this->image = $image;
+        return $this;
+    }
+
+    /**
+     * @return Location[]
+     */
+    public function getLocations(): iterable
+    {
+        return $this->locations;
+    }
+
+    /**
+     * @param Location[] $locations
+     */
+    public function setLocations(iterable $locations): self
+    {
+        foreach ($this->locations as $location) {
+            $this->removeLocation($location);
+        }
+        foreach ($locations as $location) {
+            $this->addLocation($location);
+        }
+        return $this;
+    }
+
+    public function addLocation(Location $location): self
+    {
+        if (!$this->locations->contains($location)) {
+            $this->locations->add($location);
+        }
+        return $this;
+    }
+
+    public function removeLocation(Location $location): self
+    {
+        if ($this->locations->contains($location)) {
+            $this->locations->removeElement($location);
+        }
         return $this;
     }
 }
