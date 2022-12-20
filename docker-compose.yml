@@ -14,6 +14,7 @@ services:
       - host.docker.internal:host-gateway
     environment:
       PHP_IDE_CONFIG: "serverName=local"
+      XDEBUG_MODE: 'off'
     networks:
       - app-network
 
