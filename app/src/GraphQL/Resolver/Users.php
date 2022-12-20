@@ -15,9 +15,9 @@ class Users implements QueryInterface
 
     }
 
-    public function __invoke(ResolverInterface $resolver)
+    public function __invoke()
     {
-//        return ['id' => 1, 'name'=> 'mac suxz'];
+        return ['id' => 1, 'name'=> 'mac suxz'];
         return $this->repository->find(1);
     }
 }
