@@ -1,0 +1,15 @@
+AddEpisodeToWatchedPayload:
+  type: object
+  config:
+    fields:
+      additionJobId:
+        type: "String"
+
+AddEpisodeToWatchedInput:
+  type: input-object
+  config:
+    fields:
+      episodeId:
+        type: "Int!"
+      rating:
+        type: "String!"

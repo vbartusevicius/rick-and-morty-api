@@ -4,4 +4,9 @@ Character:
     fields:
       id: "Int"
       name: "String"
-      image: "String"
+      image:
+        type: "Image"
+        resolve: '@=query("App\\GraphQL\\Resolver\\Images", args["size"], value.getImage())'
+        args:
+          size:
+            type: "String"

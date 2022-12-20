@@ -39,3 +39,24 @@ services:
     tags:
       - { name: overblog_graphql.query }
 
+  App\GraphQL\Resolver\Watched:
+    arguments:
+      $repository: '@App\Repository\WatchedEpisodeRepository'
+      $userRepository: '@App\Repository\UserRepository'
+    tags:
+      - { name: overblog_graphql.query }
+
+  App\GraphQL\Resolver\Rating:
+    arguments:
+      $repository: '@App\Repository\WatchedEpisodeRepository'
+      $userRepository: '@App\Repository\UserRepository'
+    tags:
+      - { name: overblog_graphql.query }
+
+  App\GraphQL\Mutation\AddToWatchedMutation:
+    arguments:
+      $em: '@Doctrine\ORM\EntityManagerInterface'
+      $episodeRepository: '@App\Repository\EpisodeRepository'
+      $userRepository: '@App\Repository\UserRepository'
+    tags:
+      - { name: overblog_graphql.mutation }

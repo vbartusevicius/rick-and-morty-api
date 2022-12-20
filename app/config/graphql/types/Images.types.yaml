@@ -2,5 +2,6 @@ Image:
   type: object
   config:
     fields:
-      id: "Int"
-      url: "String"
+      url:
+        type: "String"
+        resolve: "@=value.getContents()"

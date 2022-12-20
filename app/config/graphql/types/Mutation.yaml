@@ -1,0 +1,11 @@
+Mutation:
+  type: object
+  config:
+    fields:
+      AddEpisodeToWatched:
+        type: AddEpisodeToWatchedPayload!
+        resolve: '@=mutation("App\\GraphQL\\Mutation\\AddToWatchedMutation", args["input"])'
+        args:
+          #using input object type is optional, we use it here to be iso with relay mutation example.
+          input:
+            type: AddEpisodeToWatchedInput!

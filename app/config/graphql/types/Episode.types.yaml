@@ -6,7 +6,7 @@ Episode:
       name: "String"
       image:
         type: "Image"
-        resolve: '@=query("App\\GraphQL\\Resolver\\Images", context, info, args["size"])'
+        resolve: '@=query("App\\GraphQL\\Resolver\\Images", args["size"], value.getImage())'
         args:
           size:
             type: "String"
@@ -14,7 +14,6 @@ Episode:
       description: "String"
       episode_number: "Int"
       season_number: "Int"
-      rating: "String"
       characters:
         type: "[Character!]!"
         resolve: '@=query("App\\GraphQL\\Resolver\\Characters", args["limit"])'
@@ -22,3 +21,9 @@ Episode:
           limit:
             type: 'Int'
             defaultValue: 4
+      watched:
+        type: "Boolean"
+        resolve: '@=query("App\\GraphQL\\Resolver\\Watched", context, value)'
+      rating:
+        type: 'String'
+        resolve: '@=query("App\\GraphQL\\Resolver\\Rating", context, value)'

@@ -6,8 +6,12 @@ Query:
           type: "User"
           resolve: '@=query("App\\GraphQL\\Resolver\\Users")'
         episodes:
-          type: "[Episode!]!"
-          resolve: '@=query("App\\GraphQL\\Resolver\\Episodes", args["limit"])'
-          args:
-            limit:
-              type: 'Int'
+          type: EpisodeConnection
+          argsBuilder: "Relay::Connection"
+          resolve: '@=query("App\\GraphQL\\Resolver\\Episodes", args)'
+
+EpisodeConnection:
+  type: relay-connection
+  config:
+    nodeType: Episode
+#    resolveNode: '@=query("node", value)'
