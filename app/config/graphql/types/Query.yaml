@@ -1,0 +1,7 @@
+Query:
+    type: object
+    config:
+      resolverField: '@=query("App\\GraphQL\\Resolver\\Users", info, args.name)'
+      fields:
+        name:
+          type: String

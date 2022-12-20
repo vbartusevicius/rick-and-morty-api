@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/app/var" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/webmozart/assert" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/phpdocumentor/reflection-common" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/phpdocumentor/reflection-docblock" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/phpdocumentor/type-resolver" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/webonyx/graphql-php" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/murtukov/php-code-generator" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/property-access" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/options-resolver" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/property-info" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/symfony/expression-language" />
+      <excludeFolder url="file://$MODULE_DIR$/app/vendor/overblog/graphql-bundle" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
