@@ -5,17 +5,19 @@ parameters:
 
 services:
   _defaults:
-    autowire: true
-    autoconfigure: true
+    autowire: false
+    autoconfigure: false
 
-  App\:
-    resource: '../src/'
-    exclude:
-      - '../src/DependencyInjection/'
-      - '../src/Entity/'
-      - '../src/Kernel.php'
+#  App\:
+#    resource: '../src/'
+#    exclude:
+#      - '../src/DependencyInjection/'
+#      - '../src/Entity/'
+#      - '../src/Kernel.php'
 
   App\GraphQL\Resolver\Users:
+    arguments:
+      $repository: '@App\Repository\UserRepository'
     tags:
       - { name: overblog_graphql.query}
 

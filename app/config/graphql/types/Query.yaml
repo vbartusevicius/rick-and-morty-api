@@ -4,4 +4,4 @@ Query:
       fields:
         user:
           type: "User"
-          resolve: '@=query("App\GraphQL\Resolver\Users")'
+          resolve: '@=query("App\\GraphQL\\Resolver\\Users")'
