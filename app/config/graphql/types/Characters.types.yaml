@@ -1,0 +1,7 @@
+Character:
+  type: object
+  config:
+    fields:
+      id: "Int"
+      name: "String"
+      image: "String"

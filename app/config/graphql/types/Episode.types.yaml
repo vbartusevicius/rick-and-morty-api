@@ -1,0 +1,24 @@
+Episode:
+  type: object
+  config:
+    fields:
+      id: "Int"
+      name: "String"
+      image:
+        type: "Image"
+        resolve: '@=query("App\\GraphQL\\Resolver\\Images", context, info, args["size"])'
+        args:
+          size:
+            type: "String"
+      date: "String"
+      description: "String"
+      episode_number: "Int"
+      season_number: "Int"
+      rating: "String"
+      characters:
+        type: "[Character!]!"
+        resolve: '@=query("App\\GraphQL\\Resolver\\Characters", args["limit"])'
+        args:
+          limit:
+            type: 'Int'
+            defaultValue: 4

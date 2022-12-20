@@ -21,3 +21,21 @@ services:
     tags:
       - { name: overblog_graphql.query}
 
+  App\GraphQL\Resolver\Episodes:
+    arguments:
+      $repository: '@App\Repository\EpisodeRepository'
+    tags:
+      - { name: overblog_graphql.query }
+
+  App\GraphQL\Resolver\Characters:
+    arguments:
+      $repository: '@App\Repository\CharacterRepository'
+    tags:
+      - { name: overblog_graphql.query }
+
+  App\GraphQL\Resolver\Images:
+    arguments:
+      $imageProvider: '@App\Feature\File\Provider\ImageProvider'
+    tags:
+      - { name: overblog_graphql.query }
+

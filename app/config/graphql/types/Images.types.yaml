@@ -1,0 +1,6 @@
+Image:
+  type: object
+  config:
+    fields:
+      id: "Int"
+      url: "String"
