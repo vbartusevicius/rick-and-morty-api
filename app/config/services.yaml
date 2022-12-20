@@ -41,15 +41,15 @@ services:
 
   App\GraphQL\Resolver\Watched:
     arguments:
-      $repository: '@App\Repository\WatchedEpisodeRepository'
       $userRepository: '@App\Repository\UserRepository'
+      $loader: '@watched_episodes_dataloader'
     tags:
       - { name: overblog_graphql.query }
 
   App\GraphQL\Resolver\Rating:
     arguments:
-      $repository: '@App\Repository\WatchedEpisodeRepository'
       $userRepository: '@App\Repository\UserRepository'
+      $loader: '@watched_episodes_dataloader'
     tags:
       - { name: overblog_graphql.query }
 
@@ -60,3 +60,9 @@ services:
       $userRepository: '@App\Repository\UserRepository'
     tags:
       - { name: overblog_graphql.mutation }
+
+
+  App\GraphQL\Loader\WatchedEpisodesLoader:
+    arguments:
+      $repository: '@App\Repository\WatchedEpisodeRepository'
+      $promiseAdapter: '@overblog_dataloader.webonyx_graphql_sync_promise_adapter'

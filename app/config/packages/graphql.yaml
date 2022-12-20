@@ -9,3 +9,15 @@ overblog_graphql:
                     type: yaml
                     dir: "%kernel.project_dir%/config/graphql/types"
                     suffix: null
+    services:
+        promise_adapter: "webonyx_graphql.sync_promise_adapter"
+
+overblog_dataloader:
+    defaults:
+        promise_adapter: "overblog_dataloader.webonyx_graphql_sync_promise_adapter"
+    loaders:
+        watched_episodes:
+            alias: "watched_episodes_dataloader"
+            batch_load_fn: "@App\\GraphQL\\Loader\\WatchedEpisodesLoader:all"
+            options:
+                cache_key_fn: 'json_encode'

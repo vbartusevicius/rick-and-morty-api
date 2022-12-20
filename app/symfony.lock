@@ -53,6 +53,9 @@
     "liip/test-fixtures-bundle": {
         "version": "2.4.1"
     },
+    "overblog/dataloader-bundle": {
+        "version": "v0.6.0"
+    },
     "overblog/graphql-bundle": {
         "version": "0.15",
         "recipe": {
